@@ -13,8 +13,7 @@ int main (int argc, char *argv[]) {
     // teste abrindo o arquivo entrada.txt
     scanf("%s", arq1); 
     int fd1 = open(arq1, O_RDONLY);
-    for (int i = 0; i < 5; i++) {
-        read(fd1, buf, 1);
+    while (read(fd1, buf, 1)>0) {
         printf("Caracter lido: %c\n", buf[0]);
     }
     close(fd1);

@@ -1,21 +1,26 @@
-#define _POSIX_C_SOURCE 200112L
+// parte2.c
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
+#define _POSIX_C_SOURCE 200112L
 #include <string.h>
 
-int main() {
-    pid_t filho;
+int main(void) {
+    pid_t filho = fork();
 
-    filho = fork();
     if (filho == 0) {
-        int i = 1/0;
-        printf("Divisão por zero!\n");
-    }  else {
-        // código do pai
+        // Estamos no filho
+        printf("Eu sou o filho, meu PID = %d\n", getpid());
+        // loop infinito
+        for (;;) pause();
+    } else {
+        // Estamos no pai: espera o término do filho
         int status;
         pid_t w = wait(&status);
+        printf("Pai: criança com PID %d terminou (wait retornou %d)\n",
+               filho, (int)w);
 
         printf("wait() retornou PID = %d (esperado %d)\n", w, filho);
         printf("WIFEXITED(status)   = %d\n", WIFEXITED(status));
@@ -39,6 +44,5 @@ int main() {
             }
         }
     }
-
     return 0;
 }

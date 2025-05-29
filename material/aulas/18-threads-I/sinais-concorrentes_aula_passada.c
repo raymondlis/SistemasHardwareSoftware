@@ -7,7 +7,7 @@ man 7 signal
 SIGINT - 2
 SIGTERM - 15
 */
-
+#define _POSIX_C_SOURCE 200112L
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
