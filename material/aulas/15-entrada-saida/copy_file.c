@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     /* copia byte a byte até EOF */
     while (read(fd_src, buf, 1) > 0) {
         write(fd_dst, buf, 1);
-    }
+    }   
 
     close(fd_src);
     close(fd_dst);

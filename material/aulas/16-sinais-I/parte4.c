@@ -24,7 +24,7 @@ int main(void) {
         
         int status;
 
-        pid_t ret = waitpid(filho, &status, WNOHANG);
+            
         if (ret == 0) {
             // filho ainda está vivo
             printf("Filho %d ainda está executando → enviando SIGKILL\n", filho);
